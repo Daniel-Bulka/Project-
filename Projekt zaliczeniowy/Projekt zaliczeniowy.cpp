@@ -126,15 +126,15 @@ int main()
 	while (wybor !=9)
 	{
 		cout << "------------BAZA DANYCH------------\n" << endl;
-		cout << "Wybierz opcje:\n " << endl;
+		cout << "WYBIERZ OPCJE:\n " << endl;
 		cout << "1.Wprowadz dane nowego pojazdu\n" << endl;
-		cout << "2.Wyswietl liste pojazdow\n" << endl;
-		cout << "3.Wyswietl pojazdy powyzej 100 koni\n" << endl;
+		cout << "2.Wyswietl katalog pojazdow\n" << endl;
+		cout << "3.Wyswietl pojazdy powyzej 200 tysiecy przebiegu\n" << endl;
 		cout << "4.Wyswietl dane pojedynczego pojazdu\n" << endl;
 		cout << "5.Posortuj pojazdy po wybranym parametrze\n" << endl;
 		cout << "6.Usun pojazd\n" << endl;
-		cout << "7.Zapisz baze\n" << endl;
-		cout << "8.Wczytaj baze\n" << endl;
+		cout << "7.Zapisz katalog\n" << endl;
+		cout << "8.Wczytaj katalog\n" << endl;
 		cout << "9.Wyjdz\n" << endl;
 		cout << "\n";
 		
@@ -145,7 +145,7 @@ int main()
 		{
 		case '1':
 		{
-			cout << "Wprowadz pojazd do bazy:\n " << endl; 
+			cout << "Wprowadz pojazd do katalogu:\n " << endl; 
 			pojazd wprowadzany_pojazd=pojazd(true);
 			katalog.push_back(wprowadzany_pojazd);
 		}
@@ -153,19 +153,28 @@ int main()
 		
 		case '2':
 		{
-			cout << "Lista pojazdow: " << endl;
+			cout << "Katalog pojazdow:" << endl;
 			wypisz_katalog(katalog);
 		}
 		break;
 		
 	    case '3':
 		{
-			cout << "Pojazdy powyzej 100 koni: " << endl;
+			int i = 1;
+			for (pojazd pojazd : katalog)
+			{
+				if (pojazd.przebieg < 200000)
+				{
+					pojazd.wypisz();
+				}
+			}
 		}
 		break;
 
 		case '4':
 		{
+			cout << "Ktory pojazd chcesz wyswietlic?\n";
+			cout << "Numer pojazdu: ";
 			int numer;
 			cin >> numer;
 			if (numer > 0 && numer <= katalog.size())
@@ -183,7 +192,7 @@ int main()
 		
 		case '6':
 		{
-			cout << "Ktory pojazd chcesz usunac? " << endl;
+			cout << "Ktory pojazd chcesz usunac?" << endl;
 			int numer;
 			cin >> numer;
 			if (numer > 0 && numer <= katalog.size())
