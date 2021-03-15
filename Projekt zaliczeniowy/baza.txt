@@ -1,0 +1,4 @@
+Audi a4 2005 1.9 345869 automatyczna
+Subara impreza 2000 2.5 145678 manualna
+Volksvagen passat 2000 1.9 456789 manualna
+BMW x5 2008 3 156789 automatyczna
