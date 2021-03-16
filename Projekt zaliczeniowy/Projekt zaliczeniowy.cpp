@@ -126,7 +126,7 @@ vector <pojazd> wczytaj_baze()
 int main()
 {
 	vector <pojazd> katalog;
-	pojazd car;
+	
 	while (wybor !=9)
 	{
 		cout << "------------BAZA DANYCH------------\n" << endl;
