@@ -3,12 +3,14 @@
 #include <conio.h>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
 char wybor;
+char opcja;
 
-class pojazd
+class pojazd 
 {
 public:
 	string marka;
@@ -17,6 +19,7 @@ public:
 	float pojemnosc_silnika;
 	int przebieg;
 	string skrzynia_biegow;
+	
 	pojazd(){};
     pojazd(bool fura)
 	{
@@ -123,13 +126,14 @@ vector <pojazd> wczytaj_baze()
 int main()
 {
 	vector <pojazd> katalog;
+	pojazd car;
 	while (wybor !=9)
 	{
 		cout << "------------BAZA DANYCH------------\n" << endl;
 		cout << "WYBIERZ OPCJE:\n " << endl;
 		cout << "1.Wprowadz dane nowego pojazdu\n" << endl;
 		cout << "2.Wyswietl katalog pojazdow\n" << endl;
-		cout << "3.Wyswietl pojazdy powyzej 200 tysiecy przebiegu\n" << endl;
+		cout << "3.Wyswietl pojazdy ponizej 200 tysiecy przebiegu\n" << endl;
 		cout << "4.Wyswietl dane pojedynczego pojazdu\n" << endl;
 		cout << "5.Posortuj pojazdy po wybranym parametrze\n" << endl;
 		cout << "6.Usun pojazd\n" << endl;
@@ -186,7 +190,88 @@ int main()
 
 		case '5':
 		{
-			
+			char opcja;
+			cout << "Wybierz po jakim parametrze chcesz posortowac:\n" << endl;
+			cout << "1.Marka\n" << endl;
+			cout << "2.Model\n" << endl;
+			cout << "3.Rok produkcji\n" << endl;
+			cout << "4.Pojemnosc silnika\n" << endl;
+			cout << "5.Przebieg\n" << endl;
+			cout << "6.Typ skrzyni biegow\n" << endl;
+			cout << "Wybierz: ";
+			cin >> opcja;
+			cout << "0.Wieksza\n";
+			cout << "1.Mniejsza\n";
+
+			int mniejsza;
+			cin >> mniejsza;
+
+			sort(katalog.begin(), katalog.end(), [opcja,mniejsza](const pojazd & x, const pojazd & y)
+				{
+					bool wynik = false;
+
+					switch (opcja)
+					{
+					case'1':
+					{
+						if (mniejsza)
+						wynik = x.marka > y.marka;
+						else
+						wynik = x.marka < y.marka;
+						
+					}
+					break;
+
+					case'2':
+					{
+						if (mniejsza)
+						wynik = x.model > y.model;
+						else
+                        wynik = x.model < y.model;
+					}
+					break;
+					
+					case'3':
+					{
+						if(mniejsza)
+						wynik = x.rok_produkcji > y.rok_produkcji;
+						else
+						wynik = x.rok_produkcji < y.rok_produkcji;
+					}
+					break;
+
+					case'4':
+					{
+						if(mniejsza)
+						wynik = x.pojemnosc_silnika > y.pojemnosc_silnika;
+						else
+						wynik = x.pojemnosc_silnika < y.pojemnosc_silnika;
+					}
+					break;
+
+					case'5':
+					{
+						if (mniejsza)
+						wynik = x.przebieg > y.przebieg;
+						else
+						wynik = x.przebieg < y.przebieg;
+					}
+					break;
+					
+					case'6':
+					{
+						if(mniejsza)
+						wynik = x.skrzynia_biegow > y.skrzynia_biegow;
+						else
+						wynik = x.skrzynia_biegow < y.skrzynia_biegow;
+					}
+					break;
+					}
+					return wynik;
+				}
+			);
+			wypisz_katalog(katalog);
+
 		}
 		break;
 		
@@ -221,7 +306,8 @@ int main()
 			exit(0);
 		}
 		break;
-		default: cout << "Nie ma takiej opcji w menu!" << endl;
+		
+	    default: cout << "Nie ma takiej opcji w menu!" << endl;
 		}
 		_getch();
 

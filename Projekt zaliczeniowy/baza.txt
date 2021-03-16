@@ -1,4 +1,12 @@
+Mercedes E 2012 1.8 300123 automatyczna
+Ford Fusion 2014 1.4 56789 automatyczna
+Audi TT 2004 3 56789 automatyczna
 Audi a4 2005 1.9 345869 automatyczna
+Bmw x1 2005 1.8 218000 automatyczna
+BMW x5 2008 3 156789 automatyczna
+Toyota Auris 2008 1.9 456789 manualna
+Opel Corsa 2004 1.4 176894 manualna
+Ford Mondeo 2007 2 218000 manualna
+Skoda Superb 2006 2.5 184902 manualna
 Subara impreza 2000 2.5 145678 manualna
 Volksvagen passat 2000 1.9 456789 manualna
-BMW x5 2008 3 156789 automatyczna
