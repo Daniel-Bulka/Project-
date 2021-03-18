@@ -123,6 +123,75 @@ vector <pojazd> wczytaj_baze()
 	return katalog;
 }
 
+void sortuj(vector<pojazd> &katalog, int opcja, int mniejsza)
+{
+	
+	sort(katalog.begin(), katalog.end(), [opcja, mniejsza](const pojazd& x, const pojazd& y)
+		{
+			bool wynik = false;
+
+			switch (opcja)
+			{
+			case'1':
+			{
+				if (mniejsza)
+					wynik = x.marka > y.marka;
+				else
+					wynik = x.marka < y.marka;
+
+			}
+			break;
+
+			case'2':
+			{
+				if (mniejsza)
+					wynik = x.model > y.model;
+				else
+					wynik = x.model < y.model;
+			}
+			break;
+
+			case'3':
+			{
+				if (mniejsza)
+					wynik = x.rok_produkcji > y.rok_produkcji;
+				else
+					wynik = x.rok_produkcji < y.rok_produkcji;
+			}
+			break;
+
+			case'4':
+			{
+				if (mniejsza)
+					wynik = x.pojemnosc_silnika > y.pojemnosc_silnika;
+				else
+					wynik = x.pojemnosc_silnika < y.pojemnosc_silnika;
+			}
+			break;
+
+			case'5':
+			{
+				if (mniejsza)
+					wynik = x.przebieg > y.przebieg;
+				else
+					wynik = x.przebieg < y.przebieg;
+			}
+			break;
+
+			case'6':
+			{
+				if (mniejsza)
+					wynik = x.skrzynia_biegow > y.skrzynia_biegow;
+				else
+					wynik = x.skrzynia_biegow < y.skrzynia_biegow;
+			}
+			break;
+			}
+			return wynik;
+		}
+	);
+}
+
 int main()
 {
 	vector <pojazd> katalog;
@@ -206,72 +275,8 @@ int main()
 			int mniejsza;
 			cin >> mniejsza;
 
-			sort(katalog.begin(), katalog.end(), [opcja,mniejsza](const pojazd & x, const pojazd & y)
-				{
-					bool wynik = false;
-
-					switch (opcja)
-					{
-					case'1':
-					{
-						if (mniejsza)
-						wynik = x.marka > y.marka;
-						else
-						wynik = x.marka < y.marka;
-						
-					}
-					break;
-
-					case'2':
-					{
-						if (mniejsza)
-						wynik = x.model > y.model;
-						else
-                        wynik = x.model < y.model;
-					}
-					break;
-					
-					case'3':
-					{
-						if(mniejsza)
-						wynik = x.rok_produkcji > y.rok_produkcji;
-						else
-						wynik = x.rok_produkcji < y.rok_produkcji;
-					}
-					break;
-
-					case'4':
-					{
-						if(mniejsza)
-						wynik = x.pojemnosc_silnika > y.pojemnosc_silnika;
-						else
-						wynik = x.pojemnosc_silnika < y.pojemnosc_silnika;
-					}
-					break;
-
-					case'5':
-					{
-						if (mniejsza)
-						wynik = x.przebieg > y.przebieg;
-						else
-						wynik = x.przebieg < y.przebieg;
-					}
-					break;
-					
-					case'6':
-					{
-						if(mniejsza)
-						wynik = x.skrzynia_biegow > y.skrzynia_biegow;
-						else
-						wynik = x.skrzynia_biegow < y.skrzynia_biegow;
-					}
-					break;
-					}
-					return wynik;
-				}
-			);
+			sortuj (katalog, opcja, mniejsza);
 			wypisz_katalog(katalog);
-
 		}
 		break;
 		
