@@ -12,14 +12,16 @@ char opcja;
 
 class pojazd 
 {
-public:
 	string marka;
 	string model;
 	int rok_produkcji;
 	float pojemnosc_silnika;
 	int przebieg;
 	string skrzynia_biegow;
-	
+
+	friend void sortuj(vector<pojazd>& katalog, int opcja, int mniejsza);
+
+public:
 	pojazd(){};
     pojazd(bool fura)
 	{
@@ -41,6 +43,40 @@ public:
 		cout << "Typ skrzyni biegow: ";
 		cin >> skrzynia_biegow;
 	 }
+	pojazd(string marka, string model, int rok_produkcji, float pojemnosc_silnika, int przebieg, string skrzynia_biegow) 
+	{
+		this->marka = marka;
+		this->model = model;
+		this->rok_produkcji = rok_produkcji;
+		this->pojemnosc_silnika = pojemnosc_silnika;
+		this->przebieg = przebieg;
+		this->skrzynia_biegow = skrzynia_biegow;
+    }
+	string getmarka()
+	{
+		return marka;
+	}
+	string getmodel()
+	{
+		return model;
+	}
+	int getrok_produkcji()
+	{
+		return rok_produkcji;
+	}
+	float getpojemnosc_silnika()
+	{
+		return pojemnosc_silnika;
+	}
+	int getprzebieg()
+	{
+		return przebieg;
+	}
+	string getskrzynia_biegow()
+	{
+		return skrzynia_biegow;
+	}
+	
 	void wypisz() 
 	{
 		cout << marka << " ";
@@ -53,25 +89,32 @@ public:
 	}
 };
 
-void wczytaj_pojazd(pojazd*pojazd)
+pojazd wczytaj_pojazd()
 {
+	string marka, model, skrzynia_biegow;
+	int rok_produkcji, przebieg;
+	float pojemnosc_silnika;
+
 	cout << "Marka: ";
-	cin >> pojazd->marka;
+	cin >> marka;
 
 	cout << "Model: ";
-	cin >> pojazd->model;
+	cin >> model;
 
 	cout << "Rok produkcji: ";
-	cin >> pojazd->rok_produkcji;
+	cin >> rok_produkcji;
 
 	cout << "Pojemnosc silnika: ";
-	cin >> pojazd->pojemnosc_silnika;
+	cin >> pojemnosc_silnika;
 
 	cout << "Przebieg: ";
-	cin >> pojazd->przebieg;
+	cin >> przebieg;
 
 	cout << "Typ skrzyni biegow: ";
-	cin >> pojazd->skrzynia_biegow;
+	cin >> skrzynia_biegow;
+
+	pojazd nowypojazd(marka, model, rok_produkcji, pojemnosc_silnika, przebieg, skrzynia_biegow);
+	return nowypojazd;
 }
 
 void zapisz_pojazd(vector <pojazd> katalog)
@@ -80,12 +123,12 @@ void zapisz_pojazd(vector <pojazd> katalog)
 	plik.open("baza.txt");
 	for (pojazd pojazd : katalog)
 	{
-    plik << pojazd.marka << " ";
-	plik << pojazd.model << " ";
-	plik << pojazd.rok_produkcji << " ";
-	plik << pojazd.pojemnosc_silnika << " ";
-	plik << pojazd.przebieg << " ";
-	plik << pojazd.skrzynia_biegow;
+    plik << pojazd.getmarka() << " ";
+	plik << pojazd.getmodel() << " ";
+	plik << pojazd.getrok_produkcji() << " ";
+	plik << pojazd.getpojemnosc_silnika() << " ";
+	plik << pojazd.getprzebieg() << " ";
+	plik << pojazd.getskrzynia_biegow();
 	plik << endl;
 	}
 	plik.close();
@@ -102,21 +145,26 @@ void wypisz_katalog(vector <pojazd> katalog)
 vector <pojazd> wczytaj_baze()
 {
 	vector <pojazd> katalog;
-	pojazd pojazd{};
 	ifstream plik;
 	plik.open("baza.txt");
 	while (plik.peek()!=EOF)
 	{
-		plik >> pojazd.marka;
-		plik >> pojazd.model;
-		plik >> pojazd.rok_produkcji;
-		plik >> pojazd.pojemnosc_silnika;
-		plik >> pojazd.przebieg;
-		plik >> pojazd.skrzynia_biegow;
+		string marka, model, skrzynia_biegow;
+	    int rok_produkcji, przebieg;
+	    float pojemnosc_silnika;
+
+		plik >> marka;
+		plik >> model;
+		plik >> rok_produkcji;
+		plik >> pojemnosc_silnika;
+		plik >> przebieg;
+		plik >> skrzynia_biegow;
 		
+		pojazd nowypojazd(marka, model, rok_produkcji, pojemnosc_silnika, przebieg, skrzynia_biegow);
+
 		if (!plik.eof())
 		{
-			katalog.push_back(pojazd);
+			katalog.push_back(nowypojazd);
 		}
 	}
 	plik.close();
@@ -236,7 +284,7 @@ int main()
 			int i = 1;
 			for (pojazd pojazd : katalog)
 			{
-				if (pojazd.przebieg < 200000)
+				if (pojazd.getprzebieg() < 200000)
 				{
 					pojazd.wypisz();
 				}
