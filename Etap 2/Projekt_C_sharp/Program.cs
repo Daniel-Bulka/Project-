@@ -6,7 +6,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Projekt_C_sharp
 {
 	[Serializable]
@@ -77,7 +76,111 @@ namespace Projekt_C_sharp
 				return (List<Pojazd>)binaryFormatter.Deserialize(stream);
 			}
 		}
-		
+		public static void szukaj_pojazdu(List<Pojazd> katalog)
+		{
+			Console.WriteLine("Wybierz parametr\n");
+			Console.WriteLine("1.Marka\n");
+			Console.WriteLine("2.Model\n");
+			Console.WriteLine("3.Rok produkcji\n");
+			Console.WriteLine("4.Pojemnosc silnika\n");
+			Console.WriteLine("5.Przebieg\n");
+			Console.WriteLine("6.Typ skrzyni biegow\n");
+
+			char w;
+			w = Console.ReadLine()[0];
+			switch (w)
+			{
+				case '1':
+					{
+						Console.WriteLine("Marka\n");
+						string szukaj;
+						szukaj = Console.ReadLine();
+						foreach (var samochod in katalog)
+						{
+							if (samochod.marka.Contains(szukaj))
+							{
+								samochod.wypisz();
+							}
+						}
+						break;
+					}
+				case '2':
+					{
+						Console.WriteLine("Model\n");
+						string szukaj;
+						szukaj = Console.ReadLine();
+						foreach (var samochod in katalog)
+						{
+							if (samochod.model.Contains(szukaj))
+							{
+								samochod.wypisz();
+							}
+						}
+						break;
+					}
+				case '3':
+					{
+						Console.WriteLine("Rok produkjci\n");
+						int szukaj;
+						szukaj = Program.Pobierzliczbe();
+						foreach (var samochod in katalog)
+						{
+							if (samochod.rok_produkcji == szukaj)
+							{
+								samochod.wypisz();
+							}
+						}
+						break;
+					}
+				case '4':
+					{
+						Console.WriteLine("Pojemnosc silnika\n");
+						int szukaj;
+						szukaj = Program.Pobierzliczbe();
+						foreach (var samochod in katalog)
+						{
+							if (samochod.pojemnosc_silnika == szukaj)
+							{
+								samochod.wypisz();
+							}
+						}
+						break;
+					}
+				case '5':
+					{
+						Console.WriteLine("Przebieg\n");
+						int szukaj;
+						szukaj = Program.Pobierzliczbe();
+						foreach (var samochod in katalog)
+						{
+							if (samochod.przebieg == szukaj)
+							{
+								samochod.wypisz();
+							}
+						}
+						break;
+					}
+				case '6':
+					{
+						Conse.WriteLine("Typ Skrzyni biegow\n");
+						string szukaj;
+						szukaj = Console.ReadLine();
+						foreach (var samochod in katalog)
+						{
+							if (samochod.skrzynia_biegow.Contains(szukaj))
+							{
+								samochod.wypisz();
+							}
+						}
+						break;
+					}
+				default:
+					{
+						break;
+					}
+			}
+		}
+
 	}		
     class Program
     {
@@ -111,7 +214,7 @@ namespace Projekt_C_sharp
 				Console.WriteLine("2.Wyswietl katalog pojazdow\n");
 				Console.WriteLine("3.Wyswietl pojazdy ponizej 200 tysiecy przebiegu\n");
 				Console.WriteLine("4.Wyswietl dane pojedynczego pojazdu\n");
-				Console.WriteLine("5.Posortuj pojazdy po wybranym parametrze\n");
+				Console.WriteLine("5.Wyszukaj pojazdy po wybranym parametrze\n");
 				Console.WriteLine("6.Usun pojazd\n");
 				Console.WriteLine("7.Zapisz katalog\n");
 				Console.WriteLine("8.Wczytaj katalog\n");
@@ -162,20 +265,7 @@ namespace Projekt_C_sharp
 						break;
 					case '5':
                         {
-							char opcja;
-							Console.WriteLine("Wybierz po jakim parametrze chcesz posortowac:\n");
-							Console.WriteLine("1.Marka\n");
-							Console.WriteLine("2.Model\n");
-							Console.WriteLine("3.Rok produkcji\n");
-							Console.WriteLine("4.Pojemnosc silnika\n");
-							Console.WriteLine("5.Przebieg\n");
-							Console.WriteLine("6.Typ skrzyni biegow\n");
-							Console.WriteLine("Wybierz:");
-							
-							Console.WriteLine("0.Wieksza\n");
-							Console.WriteLine("1.Mniejsza\n");
-
-							int mniejsza;
+							Pojazd.szukaj_pojazdu(katalog);
                         }
 						break;
 					case '6':
@@ -212,6 +302,17 @@ namespace Projekt_C_sharp
 		}
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
